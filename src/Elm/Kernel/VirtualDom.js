@@ -17,6 +17,7 @@ import VirtualDom exposing (toHandlerInt)
 // HELPERS
 
 
+console.log("---------------------------- CUSTOM VIRTUAL DOM LOADED ---------------------------")
 var _VirtualDom_divertHrefToApp;
 
 var _VirtualDom_doc = typeof document !== 'undefined' ? document : {};
@@ -739,11 +740,15 @@ function _VirtualDom_diffHelp(x, y, patches, index)
 			{
 				same = xRefs[i] === yRefs[i];
 			}
+
 			if (same)
 			{
+        document.dispatchEvent(new CustomEvent('elm-lazy-success', { detail: x }))
 				y.__node = x.__node;
 				return;
-			}
+      } else {
+        document.dispatchEvent(new CustomEvent('elm-lazy-failure', { detail: x }))
+      }
 			y.__node = y.__thunk();
 			var subPatches = [];
 			_VirtualDom_diffHelp(x.__node, y.__node, subPatches, 0);
