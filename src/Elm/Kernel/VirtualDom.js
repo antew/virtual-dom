@@ -738,7 +738,7 @@ function _VirtualDom_diffHelp(x, y, patches, index)
 			var same = i === yRefs.length;
 			while (same && i--)
 			{
-				same = xRefs[i] === yRefs[i];
+				same = _Utils_eq(xRefs[i], yRefs[i]);
 			}
 
 			if (same)
